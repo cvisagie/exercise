@@ -1,5 +1,5 @@
 """
-Application to process soccer scrores to ranking list
+Application to process soccer scores to ranking list
 """
 # Make all string literals unicode by default
 from __future__ import unicode_literals
@@ -97,13 +97,14 @@ def write_to_file(rank_list, filename):
     """
     Write rank _list to output file
     :param rank_list: Rank list of dicts
+    :param filename:  File to write to
     """
     format_string = '{index}. {name}, {rank} {unit}\n'
 
     with open(filename, 'w') as f:
         for item in rank_list:
             formatted = format_string.format(**item)
-            f.write(formatted)
+            f.write(formatted.encode('utf8'))
 
 
 def write_to_console(rank_list):
@@ -123,8 +124,8 @@ class SoccerLeagueScoreProcessor(object):
     """
     def __init__(self, input_filename, output_filename):
         """
-        :param input_file: Input file name
-        :param output_file: Output file name
+        :param input_filename: Input file name
+        :param output_filename: Output file name
         """
         self._input_filename = input_filename
         self._output_filename = output_filename
